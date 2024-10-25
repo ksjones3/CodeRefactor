@@ -1,4 +1,6 @@
 Multi-Class Classifiation Model File Order:
+
+  0. featureExploration.ipynb - Histograms of the features and made and the exploration of left to the user.
   
   1. pairingDatapointsForGNN.ipynb - This file uses the content of the GeneralFunctions.ipynb file to prepare and process the data from a ROOT file, which contains
 information regarding 100 events. The data are converted into numpy arrays and the dimensions are checked to ensure the structure makes sense. Labels are created for
