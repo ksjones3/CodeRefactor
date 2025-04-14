@@ -1,0 +1,30 @@
+First Time Running
+
+Install Docker https://www.docker.com/
+Use the following commands: 
+docker pull ghcr.io/cocoa-hep/cocoa-hep:main
+docker image tag $(docker images | grep cocoa-hep | head -n 1 | awk '{print $3}') cocoa-hep
+
+For Every Run
+
+Enter the Docker image with the command: docker run -it cocoa-hep
+To the left of the command line will be an image ID. Open a new command window. In the new window, copy the Cells_data and EventAction files into the docker image: the commands should look something like:
+docker cp Cells_data.cc <ImageID>:/root/COCOA/COCOA/src
+docker cp Cells_data.hh <ImageID>:/root/COCOA/COCOA/include
+docker cp EventAction.cc <ImageID>:/root/COCOA/COCOA/src
+Put the image ID number in place of <ImageID>
+
+In the window that is in the image, type the following commands:
+mkdir output
+cd COCOA
+cd COCOA
+../build/COCOA --macro /root/COCOA/COCOA/macro/Pythia8/ChargedPion_monochromatic_isotropic.in --config  /root/COCOA/COCOA/config/config_default.json --output /root/output/test.root --seed 5
+
+Once it is done running, use this command in the com,and window outside of the image to pull the data out of the image:
+docker cp <ImageID>:/root/output/test.root .
+
+Processing the Data
+Run the following scripts in order:
+COCOAEdgeWriter3.py
+COCOAPairWriter.py
+COCOADeltaRWriter.py
